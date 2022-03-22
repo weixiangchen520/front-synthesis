@@ -1,2 +1,15 @@
-# formily-demo
-The examples of formily
+# umi project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```
