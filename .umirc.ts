@@ -5,4 +5,9 @@ export default defineConfig({
     type: 'none',
   },
   fastRefresh: {},
+  layout: {
+    name: 'WeiXiang Chen',
+    locale: true,
+    layout: 'side',
+  },
 });
