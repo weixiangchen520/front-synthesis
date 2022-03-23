@@ -23,7 +23,8 @@ export default defineConfig({
   },
   routes: [
     {
-      path: '/',
+      wrappers: ['@/wrappers/pageContainer'],
+      path: '/home',
       name: '首页',
       icon: 'windows',
       component: './index',
@@ -35,6 +36,7 @@ export default defineConfig({
       icon: 'windows',
       routes: [
         {
+          wrappers: ['@/wrappers/pageContainer'],
           path: '/examples/home',
           name: '样例',
           icon: 'windows',
@@ -42,6 +44,7 @@ export default defineConfig({
           exact: true,
         },
         {
+          wrappers: ['@/wrappers/pageContainer'],
           path: '/examples/login',
           name: '登录',
           icon: 'windows',
@@ -51,5 +54,6 @@ export default defineConfig({
         { redirect: '/examples/home' },
       ],
     },
+    { redirect: '/home' },
   ],
 });
