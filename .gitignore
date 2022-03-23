@@ -20,3 +20,4 @@
 /.env.local
 
 /.mfsu-dev
+/.mfsu-prod
