@@ -38,9 +38,9 @@ export default defineConfig({
         {
           wrappers: ['@/wrappers/pageContainer'],
           path: '/formily/home',
-          name: '样例',
+          name: 'Hello World',
           icon: 'windows',
-          component: './examples',
+          component: './helloworld',
           exact: true,
         },
         {

@@ -7,6 +7,7 @@ interface IVerifyCodeProps {
   readyPost?: boolean;
   phoneNumber?: number;
   style?: React.CSSProperties;
+  prefix: string;
 }
 
 export const VerifyCode: React.FC<IVerifyCodeProps> = ({

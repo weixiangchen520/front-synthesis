@@ -22,7 +22,8 @@ const SchemaField = createSchemaField({
     VerifyCode,
   },
   scope: {
-    icon(name) {
+    icon(name: string) {
+      // @ts-ignore, there is no index signature
       return React.createElement(ICONS[name]);
     },
   },
