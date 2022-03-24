@@ -4,14 +4,14 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  mfsu: {
-    development: {
-      output: './.mfsu-dev',
-    },
-    production: {
-      output: './.mfsu-prod',
-    },
-  },
+  // mfsu: {
+  //   development: {
+  //     output: './.mfsu-dev',
+  //   },
+  //   production: {
+  //     output: './.mfsu-prod',
+  //   },
+  // },
   fastRefresh: {},
   layout: {
     name: 'WeiXiang Chen',
@@ -31,13 +31,13 @@ export default defineConfig({
       exact: true,
     },
     {
-      path: '/examples',
-      name: '案例',
+      path: '/formily',
+      name: 'Formily',
       icon: 'windows',
       routes: [
         {
           wrappers: ['@/wrappers/pageContainer'],
-          path: '/examples/home',
+          path: '/formily/home',
           name: '样例',
           icon: 'windows',
           component: './examples',
@@ -45,13 +45,13 @@ export default defineConfig({
         },
         {
           wrappers: ['@/wrappers/pageContainer'],
-          path: '/examples/login',
+          path: '/formily/login',
           name: '登录',
           icon: 'windows',
           component: './login',
           exact: true,
         },
-        { redirect: '/examples/home' },
+        { redirect: '/formily/home' },
       ],
     },
     { redirect: '/home' },
