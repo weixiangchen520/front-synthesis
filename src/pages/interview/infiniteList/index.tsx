@@ -4,7 +4,7 @@ import styles from './index.less';
 
 type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
 
-const Interview: FC<IPageProps> = (props) => {
+const InfiniteList: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList } = props;
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const Interview: FC<IPageProps> = (props) => {
 
 export default connect(({ interview }: IModel.IRootState) => ({
   infiniteList: interview.infiniteList,
-}))(Interview);
+}))(InfiniteList);
