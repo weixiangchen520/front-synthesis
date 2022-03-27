@@ -2,19 +2,7 @@ import { defineConfig } from 'umi';
 
 const wrappers = ['@/wrappers/pageContainer'];
 
-export default defineConfig({
-  nodeModulesTransform: {
-    type: 'none',
-  },
-  // mfsu: {
-  //   development: {
-  //     output: './.mfsu-dev',
-  //   },
-  //   production: {
-  //     output: './.mfsu-prod',
-  //   },
-  // },
-  fastRefresh: {},
+const pluginConfig = {
   layout: {
     name: 'WeiXiang Chen',
     locale: true,
@@ -23,6 +11,12 @@ export default defineConfig({
     headerTheme: 'dark',
     splitMenus: true,
   },
+  dva: {
+    hmr: true,
+  },
+};
+
+const routeConfig = {
   routes: [
     {
       wrappers,
@@ -90,4 +84,14 @@ export default defineConfig({
     },
     { redirect: '/home' },
   ],
+};
+
+export default defineConfig({
+  nodeModulesTransform: {
+    type: 'none',
+  },
+  fastRefresh: {},
+  mock: {},
+  ...pluginConfig,
+  ...routeConfig,
 });
