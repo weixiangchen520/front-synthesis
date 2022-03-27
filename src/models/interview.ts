@@ -1,7 +1,7 @@
 import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
 import service from '@/utils/service';
 
-export interface InterviewModelType {
+interface InterviewModelType {
   namespace: 'interview';
   state: IInterview.IInterviewModelState;
   effects: {

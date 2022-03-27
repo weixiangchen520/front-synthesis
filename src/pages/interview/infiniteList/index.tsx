@@ -20,6 +20,6 @@ const Interview: FC<IPageProps> = (props) => {
   );
 };
 
-export default connect(({ interview }: any) => ({
+export default connect(({ interview }: IModel.IRootState) => ({
   infiniteList: interview.infiniteList,
 }))(Interview);
