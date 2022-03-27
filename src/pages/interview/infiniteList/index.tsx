@@ -1,5 +1,6 @@
 import { RequiredConnectProps, connect } from 'umi';
 import { useEffect, FC } from 'react';
+import styles from './index.less';
 
 type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
 
@@ -7,14 +8,15 @@ const Interview: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList } = props;
 
   useEffect(() => {
-    dispatch({
-      type: 'interview/queryInfiniteList',
-    });
+    dispatch({ type: 'interview/queryInfiniteList' });
   }, []);
   return (
-    <div>
+    <div className={styles.container}>
       {infiniteList?.map(({ name, value, type }) => (
-        <div key={name}>{`name: ${name}, value: ${value}, type: ${type}`}</div>
+        <div
+          className={styles.item}
+          key={name}
+        >{`name: ${name}, value: ${value}, type: ${type}`}</div>
       ))}
     </div>
   );
