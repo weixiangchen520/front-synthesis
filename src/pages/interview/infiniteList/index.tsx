@@ -9,9 +9,26 @@ const Interview: FC<IPageProps> = (props) => {
 
   useEffect(() => {
     dispatch({ type: 'interview/queryInfiniteList' });
+
+    const targetContainer = document.getElementById('scroll-container');
+    const handleScroll = () => {
+      const clientHeight = targetContainer?.clientHeight ?? 0;
+      const scrollTop = targetContainer?.scrollTop ?? 0;
+      const scrollHeight = targetContainer?.scrollHeight ?? 0;
+      console.log(clientHeight, scrollTop, scrollHeight);
+      if (clientHeight + scrollTop >= scrollHeight) {
+        console.log('触底');
+      } else if (scrollTop === 0) {
+        console.log('触顶');
+      }
+    };
+    targetContainer!.addEventListener('scroll', handleScroll);
+    return () => {
+      targetContainer!.removeEventListener('scroll', handleScroll);
+    };
   }, []);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="scroll-container">
       {infiniteList?.map(({ name, value, type }) => (
         <div
           className={styles.item}
