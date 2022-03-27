@@ -1,15 +1,25 @@
 import { RequiredConnectProps, connect } from 'umi';
 import { useEffect, FC } from 'react';
 
-const Interview: FC<RequiredConnectProps> = (props) => {
-  const { dispatch } = props;
+type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
+
+const Interview: FC<IPageProps> = (props) => {
+  const { dispatch, infiniteList } = props;
 
   useEffect(() => {
     dispatch({
       type: 'interview/queryInfiniteList',
     });
   }, []);
-  return <div>无限列表</div>;
+  return (
+    <div>
+      {infiniteList?.map(({ name, value, type }) => (
+        <div key={name}>{`name: ${name}, value: ${value}, type: ${type}`}</div>
+      ))}
+    </div>
+  );
 };
 
-export default connect()(Interview);
+export default connect(({ interview }: any) => ({
+  infiniteList: interview.infiniteList,
+}))(Interview);

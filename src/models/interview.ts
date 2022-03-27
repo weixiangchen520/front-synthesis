@@ -1,18 +1,14 @@
 import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
 import service from '@/utils/service';
 
-export interface InterviewModelState {
-  name: string;
-}
-
 export interface InterviewModelType {
   namespace: 'interview';
-  state: InterviewModelState;
+  state: IInterview.IInterviewModelState;
   effects: {
     queryInfiniteList: Effect;
   };
   reducers: {
-    save: Reducer<InterviewModelState>;
+    save: Reducer<IInterview.IInterviewModelState>;
     // 启用 immer 之后
     // save: ImmerReducer<IndexModelState>;
   };
@@ -26,12 +22,13 @@ const IndexModel: InterviewModelType = {
 
   state: {
     name: '',
+    infiniteList: [],
   },
 
   effects: {
     *queryInfiniteList({ payload }, { call, put }) {
       const res = yield call(service, '/interview/infiniteList', {});
-      return res;
+      yield put({ type: 'save', payload: { infiniteList: res?.list || [] } });
     },
   },
   reducers: {
