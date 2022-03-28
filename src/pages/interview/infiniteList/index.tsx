@@ -1,5 +1,6 @@
 import { RequiredConnectProps, connect } from 'umi';
 import { useEffect, FC } from 'react';
+import { throttle } from '@/utils/common';
 import styles from './index.less';
 
 type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
@@ -12,6 +13,7 @@ const InfiniteList: FC<IPageProps> = (props) => {
 
     const targetContainer = document.getElementById('scroll-container');
     const handleScroll = () => {
+      // 性能问题：浏览器为了反馈给用户元素的实时属性，会立即执行待渲染队列中的待处理变化，然后重新计算元素几何属性，重新构建渲染树
       const clientHeight = targetContainer?.clientHeight ?? 0;
       const scrollTop = targetContainer?.scrollTop ?? 0;
       const scrollHeight = targetContainer?.scrollHeight ?? 0;
@@ -21,9 +23,11 @@ const InfiniteList: FC<IPageProps> = (props) => {
         console.log('触顶');
       }
     };
-    targetContainer!.addEventListener('scroll', handleScroll);
+    const throttleHandleScroll = throttle(handleScroll, 500);
+    // 性能问题：scroll触发频率会很高，需要用节流处理
+    targetContainer!.addEventListener('scroll', throttleHandleScroll);
     return () => {
-      targetContainer!.removeEventListener('scroll', handleScroll);
+      targetContainer!.removeEventListener('scroll', throttleHandleScroll);
     };
   }, []);
   return (
