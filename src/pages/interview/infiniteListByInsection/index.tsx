@@ -14,15 +14,12 @@ const InfiniteListByInsection: FC<IPageProps> = (props) => {
     const insectionObserver = new IntersectionObserver((entries) => {
       const { intersectionRatio } = entries.at(0)!;
       if (intersectionRatio === 1) {
-        console.log('触底 entries', loading, entries);
         if (!loading) {
           dispatch({
             type: 'interview/queryInfiniteList',
             payload: { pageNumber: pageNumber.current++, pageSize },
           });
         }
-      } else {
-        console.log('上拉 entries', entries);
       }
     });
     const bottomElement = document.getElementById('bottom');
