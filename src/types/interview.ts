@@ -6,11 +6,11 @@ declare namespace IInterview {
   }
 
   interface IInterviewModelState {
-    name: string;
     infiniteList: IInfinite[];
   }
 
   interface IInterviewPageProps {
     infiniteList: IInfinite[];
+    loading: boolean | undefined;
   }
 }

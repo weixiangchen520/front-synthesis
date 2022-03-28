@@ -8,6 +8,7 @@ interface InterviewModelType {
     queryInfiniteList: Effect;
   };
   reducers: {
+    saveInfiniteList: Reducer<IInterview.IInterviewModelState>;
     save: Reducer<IInterview.IInterviewModelState>;
     // 启用 immer 之后
     // save: ImmerReducer<IndexModelState>;
@@ -21,17 +22,29 @@ const IndexModel: InterviewModelType = {
   namespace: 'interview',
 
   state: {
-    name: '',
     infiniteList: [],
   },
 
   effects: {
     *queryInfiniteList({ payload }, { call, put }) {
       const res = yield call(service, '/interview/infiniteList', {});
-      yield put({ type: 'save', payload: { infiniteList: res?.list || [] } });
+      yield put({
+        type: 'saveInfiniteList',
+        payload: { infiniteList: res?.list || [] },
+      });
     },
   },
   reducers: {
+    saveInfiniteList(state, action) {
+      console.log();
+      return {
+        ...state,
+        infiniteList: [
+          ...(state?.infiniteList ?? []),
+          ...(action.payload?.infiniteList ?? []),
+        ],
+      };
+    },
     save(state, action) {
       return {
         ...state,
