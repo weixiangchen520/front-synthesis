@@ -27,7 +27,7 @@ const IndexModel: InterviewModelType = {
 
   effects: {
     *queryInfiniteList({ payload }, { call, put }) {
-      const res = yield call(service, '/interview/infiniteList', {});
+      const res = yield call(service, '/interview/infiniteList', payload);
       yield put({
         type: 'saveInfiniteList',
         payload: { infiniteList: res?.list || [] },

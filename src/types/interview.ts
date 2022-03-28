@@ -1,7 +1,7 @@
 declare namespace IInterview {
   interface IInfinite {
     name: string;
-    value: number;
+    value: string;
     type: number;
   }
 

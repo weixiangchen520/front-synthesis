@@ -1,16 +1,14 @@
 import { RequiredConnectProps, connect } from 'umi';
-import { useEffect, FC } from 'react';
+import { useEffect, useRef, FC } from 'react';
 import { Spin } from 'antd';
 import styles from './index.less';
 
 type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
 
+const pageSize = 10;
 const InfiniteListByInsection: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList, loading } = props;
-
-  useEffect(() => {
-    dispatch({ type: 'interview/queryInfiniteList' });
-  }, []);
+  const pageNumber = useRef<number>(1);
 
   useEffect(() => {
     const insectionObserver = new IntersectionObserver((entries) => {
@@ -18,7 +16,10 @@ const InfiniteListByInsection: FC<IPageProps> = (props) => {
       if (intersectionRatio === 1) {
         console.log('触底 entries', loading, entries);
         if (!loading) {
-          dispatch({ type: 'interview/queryInfiniteList' });
+          dispatch({
+            type: 'interview/queryInfiniteList',
+            payload: { pageNumber: pageNumber.current++, pageSize },
+          });
         }
       } else {
         console.log('上拉 entries', entries);
@@ -38,7 +39,7 @@ const InfiniteListByInsection: FC<IPageProps> = (props) => {
       {infiniteList?.map(({ name, value, type }) => (
         <div
           className={styles.item}
-          key={name}
+          key={value}
         >{`name: ${name}, value: ${value}, type: ${type}`}</div>
       ))}
       <div id="bottom">
