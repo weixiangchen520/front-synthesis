@@ -15,7 +15,6 @@ const InfiniteList: FC<IPageProps> = (props) => {
       const clientHeight = targetContainer?.clientHeight ?? 0;
       const scrollTop = targetContainer?.scrollTop ?? 0;
       const scrollHeight = targetContainer?.scrollHeight ?? 0;
-      console.log(clientHeight, scrollTop, scrollHeight);
       if (clientHeight + scrollTop >= scrollHeight) {
         console.log('触底');
       } else if (scrollTop === 0) {
