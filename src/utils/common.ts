@@ -5,7 +5,7 @@ export const throttle = (fn: () => void, delay: number = 0) => {
   return function () {
     const context: any = this;
     const args = arguments;
-    if (timer === undefined) {
+    if (timer !== undefined) {
       return;
     }
     timer = window.setTimeout(() => {

@@ -17,6 +17,7 @@ const InfiniteList: FC<IPageProps> = (props) => {
       const clientHeight = targetContainer?.clientHeight ?? 0;
       const scrollTop = targetContainer?.scrollTop ?? 0;
       const scrollHeight = targetContainer?.scrollHeight ?? 0;
+      console.log(clientHeight, scrollTop, scrollHeight);
       if (clientHeight + scrollTop >= scrollHeight) {
         console.log('触底');
       } else if (scrollTop === 0) {
@@ -35,7 +36,7 @@ const InfiniteList: FC<IPageProps> = (props) => {
       {infiniteList?.map(({ name, value, type }) => (
         <div
           className={styles.item}
-          key={name}
+          key={value}
         >{`name: ${name}, value: ${value}, type: ${type}`}</div>
       ))}
     </div>
