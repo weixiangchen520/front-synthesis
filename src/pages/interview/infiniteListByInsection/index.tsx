@@ -9,6 +9,7 @@ const pageSize = 10;
 const InfiniteListByInsection: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList, loading } = props;
   const pageNumber = useRef<number>(1);
+  // 处理handleScroll闭包问题
   const loadingRef = useRef<boolean | undefined>(loading);
   loadingRef.current = loading;
 
