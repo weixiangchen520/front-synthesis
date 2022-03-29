@@ -1,15 +1,21 @@
 import { RequiredConnectProps, connect } from 'umi';
-import { useEffect, FC } from 'react';
+import { useEffect, useRef, FC } from 'react';
 import { throttle } from '@/utils/common';
 import styles from './index.less';
+import { Spin } from 'antd';
 
 type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
 
+const pageSize = 10;
 const InfiniteList: FC<IPageProps> = (props) => {
-  const { dispatch, infiniteList } = props;
+  const { dispatch, infiniteList, loading } = props;
+  const pageNumber = useRef(1);
 
   useEffect(() => {
-    dispatch({ type: 'interview/queryInfiniteList' });
+    dispatch({
+      type: 'interview/queryInfiniteList',
+      payload: { pageNumebr: pageNumber.current++, pageSize },
+    });
 
     const targetContainer = document.getElementById('scroll-container');
     const handleScroll = () => {
@@ -17,9 +23,15 @@ const InfiniteList: FC<IPageProps> = (props) => {
       const clientHeight = targetContainer?.clientHeight ?? 0;
       const scrollTop = targetContainer?.scrollTop ?? 0;
       const scrollHeight = targetContainer?.scrollHeight ?? 0;
-      console.log(clientHeight, scrollTop, scrollHeight);
+      console.log(clientHeight, scrollHeight, scrollTop);
       if (clientHeight + scrollTop >= scrollHeight) {
-        console.log('触底');
+        console.log('触底', loading);
+        if (!loading) {
+          dispatch({
+            type: 'interview/queryInfiniteList',
+            payload: { pageNumebr: pageNumber.current++, pageSize },
+          });
+        }
       } else if (scrollTop === 0) {
         console.log('触顶');
       }
@@ -39,10 +51,16 @@ const InfiniteList: FC<IPageProps> = (props) => {
           key={value}
         >{`name: ${name}, value: ${value}, type: ${type}`}</div>
       ))}
+      {loading && (
+        <div className={styles.loadingWrapper}>
+          <Spin />
+        </div>
+      )}
     </div>
   );
 };
 
-export default connect(({ interview }: IModel.IRootState) => ({
+export default connect(({ interview, loading }: IModel.IRootState) => ({
   infiniteList: interview.infiniteList,
+  loading: loading.effects['interview/queryInfiniteList'],
 }))(InfiniteList);
