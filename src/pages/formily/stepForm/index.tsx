@@ -12,7 +12,7 @@ const SchemaField = createSchemaField({
 });
 
 const form = createForm();
-const formStep = FormStep.createFormStep?.();
+const formStep = FormStep.createFormStep?.()!;
 
 export default () => {
   return (
@@ -72,7 +72,7 @@ export default () => {
             <Button
               disabled={!formStep.allowNext}
               onClick={() => {
-                formStep.next();
+                formStep?.next();
               }}
             >
               下一步
