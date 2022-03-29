@@ -10,7 +10,7 @@ const pageSize = 10;
 const InfiniteList: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList, loading } = props;
   const pageNumber = useRef<number>(1);
-  // 处理handleScroll闭包问题
+  // 处理handleScroll闭包问题，useEffect会保存一个上下文执行环境，对其内的变量生成一个快照，如果不用useRef包裹一层，loading会一直是undefined
   const loadingRef = useRef<boolean | undefined>(loading);
   loadingRef.current = loading;
 
