@@ -9,7 +9,9 @@ type IPageProps = RequiredConnectProps & IInterview.IInterviewPageProps;
 const pageSize = 10;
 const InfiniteList: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList, loading } = props;
-  const pageNumber = useRef(1);
+  const pageNumber = useRef<number>(1);
+  const loadingRef = useRef<boolean | undefined>(loading);
+  loadingRef.current = loading;
 
   useEffect(() => {
     dispatch({
@@ -25,8 +27,8 @@ const InfiniteList: FC<IPageProps> = (props) => {
       const scrollHeight = targetContainer?.scrollHeight ?? 0;
       console.log(clientHeight, scrollHeight, scrollTop);
       if (clientHeight + scrollTop >= scrollHeight) {
-        console.log('触底', loading);
-        if (!loading) {
+        console.log('触底', loadingRef.current);
+        if (!loadingRef.current) {
           dispatch({
             type: 'interview/queryInfiniteList',
             payload: { pageNumebr: pageNumber.current++, pageSize },

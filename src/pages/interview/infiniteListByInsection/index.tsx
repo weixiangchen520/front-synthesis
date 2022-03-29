@@ -9,12 +9,14 @@ const pageSize = 10;
 const InfiniteListByInsection: FC<IPageProps> = (props) => {
   const { dispatch, infiniteList, loading } = props;
   const pageNumber = useRef<number>(1);
+  const loadingRef = useRef<boolean | undefined>(loading);
+  loadingRef.current = loading;
 
   useEffect(() => {
     const insectionObserver = new IntersectionObserver((entries) => {
       const { intersectionRatio } = entries.at(0)!;
       if (intersectionRatio === 1) {
-        if (!loading) {
+        if (!loadingRef.current) {
           dispatch({
             type: 'interview/queryInfiniteList',
             payload: { pageNumber: pageNumber.current++, pageSize },
