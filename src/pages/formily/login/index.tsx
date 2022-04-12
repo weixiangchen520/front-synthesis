@@ -35,7 +35,6 @@ export default () => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        background: '#eee',
         padding: '40px 0',
       }}
     >
