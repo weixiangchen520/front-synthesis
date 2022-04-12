@@ -106,6 +106,22 @@ const routeConfig = {
         { redirect: '/interview/home' },
       ],
     },
+    {
+      path: '/design-mode',
+      name: '设计模式',
+      icon: 'Windows',
+      routes: [
+        {
+          wrappers,
+          path: '/design-mode/principle',
+          name: '设计原理',
+          icon: 'windows',
+          component: './designMode/principle',
+          exact: true,
+        },
+        { redirect: '/design-mode/principle' },
+      ],
+    },
     { redirect: '/home' },
   ],
 };
