@@ -15,6 +15,7 @@ const InfiniteListByInsection: FC<IPageProps> = (props) => {
 
   useEffect(() => {
     const insectionObserver = new IntersectionObserver((entries) => {
+      console.log('entries', entries);
       const { intersectionRatio } = entries.at(0)!;
       if (intersectionRatio === 1) {
         if (!loadingRef.current) {
