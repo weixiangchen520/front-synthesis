@@ -155,6 +155,7 @@ export default defineConfig({
     type: 'none',
   },
   fastRefresh: {},
+  publicPath: './',
   mock: {},
   history: {
     type: 'hash',
