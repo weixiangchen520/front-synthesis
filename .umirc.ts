@@ -156,6 +156,9 @@ export default defineConfig({
   },
   fastRefresh: {},
   mock: {},
+  history: {
+    type: 'hash',
+  },
   ...pluginConfig,
   ...routeConfig,
 });
