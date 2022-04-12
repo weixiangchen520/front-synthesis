@@ -130,9 +130,17 @@ const routeConfig = {
         {
           wrappers,
           path: '/design-mode/principle',
-          name: '设计原理',
+          name: '面向对象设计原理',
           icon: 'windows',
           component: './designMode/principle',
+          exact: true,
+        },
+        {
+          wrappers,
+          path: '/design-mode/simple-fatory',
+          name: '简单工厂模式',
+          icon: 'windows',
+          component: './designMode/simpleFactory',
           exact: true,
         },
         { redirect: '/design-mode/principle' },
